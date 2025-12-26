@@ -1,0 +1,11 @@
+.buttonAdd{
+    background-color: var(--white);
+    padding-block: 12px;
+    padding-inline: 24px;
+    border-radius: 50px;
+    width: 160px;
+    display: flex;
+    gap: 8px;
+
+
+}

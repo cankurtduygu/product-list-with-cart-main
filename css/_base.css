@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;600;700&display=swap");
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  /* ================= COLORS ================= */
+  --red: #C73B0F;
+
+  --rose-900: #260F08;
+  --rose-500: #87635A;
+  --rose-400: #AD8A85;
+  --rose-300: #CAAFA7;
+  --rose-100: #F5EEEC;
+  --rose-50:  #FCF8F6;
+
+  --green: #1EA575;
+
+  --black: #000000;
+  --white: #FFFFFF;
+
+  /* ================= TYPOGRAPHY ================= */
+  --font-base: "Red Hat Text", sans-serif;
+
+  /* Text Preset 1 */
+  --text-1-size: 40px;
+  --text-1-line: 1.2;
+  --text-1-weight: 700;
+
+  /* Text Preset 2 */
+  --text-2-size: 24px;
+  --text-2-line: 1.25;
+  --text-2-weight: 700;
+
+  /* Text Preset 3 */
+  --text-3-size: 16px;
+  --text-3-line: 1.5;
+  --text-3-weight: 600;
+
+  /* Text Preset 4 */
+  --text-4-size: 14px;
+  --text-4-line: 1.5;
+  --text-4-weight: 400;
+
+  /* Text Preset 4 Bold */
+  --text-4b-size: 14px;
+  --text-4b-line: 1.5;
+  --text-4b-weight: 600;
+
+  /* ================= SPACING ================= */
+  --space-1000: 88px;
+  --space-500:  40px;
+  --space-400:  32px;
+  --space-300:  24px;
+  --space-200:  16px;
+  --space-150:  12px;
+  --space-100:  8px;
+  --space-50:   4px;
+}
+body {
+    font-family: var(--font-base);
+    background-color: var(--rose-50);
+    color: var(--rose-900);
+    max-width: 1440px;
+}
+
+.text-1 {
+    font-size: var(--text-1-size);
+    line-height: var(--text-1-line);
+    font-weight: var(--text-1-weight);
+}
+
+.text-2{
+    font-size: var(--text-2-size);
+    line-height: var(--text-2-line);
+    font-weight: var(--text-2-weight);
+}
+
+.text-3{
+    font-size: var(--text-3-size);
+    line-height: var(--text-3-line);
+    font-weight: var(--text-3-weight);
+}
+
+.textBold-4{
+    font-size: var(--text-4b-size);
+    line-height: var(--text-4b-line);
+    font-weight: var(--text-4b-weight);
+}
+
+.text-4{
+    font-size: var(--text-4-size);
+    line-height: var(--text-4-line);
+    font-weight: var(--text-4-weight);
+}

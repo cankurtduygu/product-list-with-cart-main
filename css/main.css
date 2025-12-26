@@ -1,0 +1,78 @@
+.main {
+    padding-block: var(--space-1000);
+    padding-inline: 7rem;
+}
+
+.container {
+    display: flex;
+    gap: var(--space-400);
+}
+
+.product-list {
+    margin-block-start: var(--space-400);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-300);
+
+    & .product-card {
+        & .card {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+
+            & .card-img {
+                width: 100%;
+                height: 240px;
+                object-fit: cover;
+            }
+
+            & .buttonAdd {
+                position: absolute;
+                bottom: -18px;
+            }
+        }
+
+        & .card-defination{
+
+            margin-block-start: 32px;
+
+            & .product-type{
+                color: var(--rose-500);
+            }
+
+            & .product-name{
+                color: var(--rose-900);
+            }
+
+            & .product-price{
+                color: var(--red);
+            }
+        }
+    }
+}
+
+    .pay-section {
+        padding: var(--space-300);
+        background-color: var(--white);
+        width: 384px;
+        /*fit content yapilabilir*/
+
+        & .head {
+            color: var(--red);
+        }
+
+        & .satilan-product {
+            margin: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        & .total{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }    
+    }
