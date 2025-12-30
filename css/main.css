@@ -28,10 +28,12 @@
                 object-fit: cover;
             }
 
-            & .buttonAdd {
+            & .buttonAdd, .buttonSecond {
                 position: absolute;
                 bottom: -18px;
             }
+
+            
         }
 
         & .card-defination{
@@ -68,6 +70,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            & .satilan-Ürün-Adet{
+                color: var(--red);
+            }
+
+            & .satilan-Ürün-Fiyat{
+                    margin-inline-start: 8px;
+                    color: var(--rose-900);
+                 }
+
+                 & .satilan-Ürün-Toplam{
+                    margin-inline-start: 8px;
+                    color: var(--rose-900);
+                 }
+
+            }
+
+
         }
 
         & .total{
