@@ -68,8 +68,9 @@
         & .satilan-product {
             margin: 24px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-start;
 
             & .satilan-Ürün-Adet{
                 color: var(--red);

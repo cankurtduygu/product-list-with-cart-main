@@ -7,10 +7,10 @@ let productsInCart = [];
 fetch("./data.json")
   .then((res) => res.json())
   .then((products) => {
-    
+
     menu = products;
-     console.log(menu);
-     renderProducts();
+    console.log(menu);
+    renderProducts();
   })
   .catch((err) => console.error("JSON okunamadı:", err));
 
@@ -76,12 +76,20 @@ function handleAddToCart(product, card, index) {
   const productDetailElements = createProductDetail(product, satilanProduct);
   let quantity = 1;
 
+  // Sepete eklenen ürünü productsInCart dizisine ekle
+  productsInCart.push({
+    id: index,
+    product: product,
+    quantity: quantity,
+    productDetailElements: productDetailElements
+  });
+
   // Toplam fiyatı güncelleyen fonksiyon
   function updateTotal() {
     let totalPrice = product.price * quantity;
     productDetailElements.soldProductTotal.textContent = `$${totalPrice.toFixed(2)}`;
     productDetailElements.soldProductQuantity.textContent = `${quantity}x`;
-    productDetailElements.totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+    updateCartTotal(); // Tüm sepetin toplamını güncelle
   }
 
   // İlk bilgileri set et
@@ -90,17 +98,51 @@ function handleAddToCart(product, card, index) {
   updateTotal();
 
   // Event listenerları ekle
-  addQuantityListeners(incrementBtn, decrementBtn, quantitySpan, () => {
-    quantity++;
-    quantitySpan.textContent = quantity;
-    updateTotal();
-  }, () => {
-    if (quantity > 1) {
-      quantity--;
+  addQuantityListeners(incrementBtn, decrementBtn, quantitySpan,
+    () => {
+      quantity++;
       quantitySpan.textContent = quantity;
+      // productsInCart dizisindeki quantity'yi de güncelle
+      const cartItem = productsInCart.find(item => item.id === index);
+      if (cartItem) cartItem.quantity = quantity;
+
       updateTotal();
+    },
+    () => {
+      if (quantity > 1) {
+        quantity--;
+        quantitySpan.textContent = quantity;
+        // productsInCart dizisindeki quantity'yi de güncelle
+        const cartItem = productsInCart.find(item => item.id === index);
+        if (cartItem) cartItem.quantity = quantity;
+
+        updateTotal();
+      } else if (quantity === 1) {
+        // quantity 1 iken tekrar azaltılırsa
+
+        // Diziden ürünü sil
+        const itemIndex = productsInCart.findIndex(item => item.id === index);
+        if (itemIndex !== -1) {
+          // Ekrandan da kaldır
+          const detailDiv = productsInCart[itemIndex].productDetailElements.soldProductTotal.closest('.ürün-detay');
+          if (detailDiv) detailDiv.remove();
+          productsInCart.splice(itemIndex, 1);
+        }
+
+        button.style.display = "block";
+        buttonSecond.style.display = "none";
+
+      }
+
+    });
+  // Tüm sepetin toplamını güncelleyen fonksiyon
+  function updateCartTotal() {
+    const totalPriceElement = document.querySelector(".total-fiyat");
+    let total = productsInCart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+    if (totalPriceElement) {
+      totalPriceElement.textContent = `$${total.toFixed(2)}`;
     }
-  });
+  }
 }
 
 // Ürün detayını oluşturan fonksiyon
