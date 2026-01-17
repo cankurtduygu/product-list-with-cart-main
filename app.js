@@ -1,5 +1,5 @@
 const productList = document.querySelector(".product-list");
-
+const buttonConfirm = document.querySelector(".buttonConfirm");
 
 let menu = [];
 let productsInCart = [];
@@ -7,16 +7,13 @@ let productsInCart = [];
 fetch("./data.json")
   .then((res) => res.json())
   .then((products) => {
-
     menu = products;
     console.log(menu);
     renderProducts();
   })
   .catch((err) => console.error("JSON okunamadı:", err));
 
-
-
-
+//ürünlerin sayfaya basildigi yer
 const renderProducts = () => {
   menu.forEach((product, index) => {
     const card = document.createElement("div");
@@ -55,6 +52,7 @@ const renderProducts = () => {
       const product = menu[productId];
       const card = button.closest(".card");
       handleAddToCart(product, card, productId);
+      buttonConfirm.style.display = "block";
     }
   });
 };
@@ -81,7 +79,7 @@ function handleAddToCart(product, card, index) {
     id: index,
     product: product,
     quantity: quantity,
-    productDetailElements: productDetailElements
+    productDetailElements: productDetailElements,
   });
 
   // Toplam fiyatı güncelleyen fonksiyon
@@ -98,12 +96,15 @@ function handleAddToCart(product, card, index) {
   updateTotal();
 
   // Event listenerları ekle
-  addQuantityListeners(incrementBtn, decrementBtn, quantitySpan,
+  addQuantityListeners(
+    incrementBtn,
+    decrementBtn,
+    quantitySpan,
     () => {
       quantity++;
       quantitySpan.textContent = quantity;
       // productsInCart dizisindeki quantity'yi de güncelle
-      const cartItem = productsInCart.find(item => item.id === index);
+      const cartItem = productsInCart.find((item) => item.id === index);
       if (cartItem) cartItem.quantity = quantity;
 
       updateTotal();
@@ -113,7 +114,7 @@ function handleAddToCart(product, card, index) {
         quantity--;
         quantitySpan.textContent = quantity;
         // productsInCart dizisindeki quantity'yi de güncelle
-        const cartItem = productsInCart.find(item => item.id === index);
+        const cartItem = productsInCart.find((item) => item.id === index);
         if (cartItem) cartItem.quantity = quantity;
 
         updateTotal();
@@ -121,24 +122,29 @@ function handleAddToCart(product, card, index) {
         // quantity 1 iken tekrar azaltılırsa
 
         // Diziden ürünü sil
-        const itemIndex = productsInCart.findIndex(item => item.id === index);
+        const itemIndex = productsInCart.findIndex((item) => item.id === index);
         if (itemIndex !== -1) {
           // Ekrandan da kaldır
-          const detailDiv = productsInCart[itemIndex].productDetailElements.soldProductTotal.closest('.ürün-detay');
+          const detailDiv =
+            productsInCart[
+              itemIndex
+            ].productDetailElements.soldProductTotal.closest(".ürün-detay");
           if (detailDiv) detailDiv.remove();
           productsInCart.splice(itemIndex, 1);
         }
 
         button.style.display = "block";
         buttonSecond.style.display = "none";
-
       }
-
-    });
+    }
+  );
   // Tüm sepetin toplamını güncelleyen fonksiyon
   function updateCartTotal() {
     const totalPriceElement = document.querySelector(".total-fiyat");
-    let total = productsInCart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+    let total = productsInCart.reduce(
+      (sum, item) => sum + item.product.price * item.quantity,
+      0
+    );
     if (totalPriceElement) {
       totalPriceElement.textContent = `$${total.toFixed(2)}`;
     }
@@ -163,14 +169,58 @@ function createProductDetail(product, container) {
     soldProductName: productDetail.querySelector(".satilan-Ürün-Adi"),
     soldProductPrice: productDetail.querySelector(".satilan-Ürün-Fiyat"),
     soldProductTotal: productDetail.querySelector(".satilan-Ürün-Toplam"),
-    totalPriceElement: document.querySelector(".total-fiyat")
+    totalPriceElement: document.querySelector(".total-fiyat"),
   };
 }
 
 // Miktar arttırma/azaltma event listenerlarını ekleyen fonksiyon
-function addQuantityListeners(incrementBtn, decrementBtn, quantitySpan, onIncrement, onDecrement) {
+function addQuantityListeners(
+  incrementBtn,
+  decrementBtn,
+  quantitySpan,
+  onIncrement,
+  onDecrement
+) {
   incrementBtn.addEventListener("click", onIncrement);
   decrementBtn.addEventListener("click", onDecrement);
 }
 
+
+const modalBody = document.querySelector(".modal-body");
+const modal = document.querySelector(".modal");
+// const overlay = document.querySelector(".overlay");
+buttonConfirm.addEventListener("click", () => {
+
+  modal.style.display = "block";
+  console.log(productsInCart);
+
+
+
+  productsInCart.forEach((item) => {
+    modalBody.innerHTML += `
+      <div class="modal-body-content">
+        <div class="ürün-detay">
+          <div class="ürün-sol">
+            <img src="${item.product.image.desktop}" alt="${item.product.name}" class="modal-ürün-img"/>
+            <div class="ürün-detay-info">
+              <p class="satilan-Ürün-Adi textBold-4">${item.product.name}</p>
+              <div class="ürün-adet-fiyat">
+                <p><span class="textBold-4" style="color:var(--red);">${item.quantity}x</span></p>
+                <p><span class="satilan-Ürün-Fiyat" style="color:var(--rose-500);">@ $${item.product.price.toFixed(2)}</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="ürün-sağ">
+            <p><span class="satilan-Ürün-Toplam text-3">$${(item.product.price * item.quantity).toFixed(2)}</span></p>
+          </div>
+        </div>
+      </div>`;
+  });
+
+  const totalPrice = document.createElement("div");
+  totalPrice.className = "order-total-container";
+  totalPrice.innerHTML = ` <p>Order Total</p>
+          <p class="text-2">$${productsInCart.reduce((sum, item) => sum + item.product.price * item.quantity, 0).toFixed(2)}</p>`;
+  modalBody.appendChild(totalPrice);
+});
 
