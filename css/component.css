@@ -1,26 +1,60 @@
-.buttonAdd{
+.product-add-button-first{
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -1.5rem;
+    color: var(--rose-900);
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--rose-400);
     background-color: var(--white);
-    padding-block: 12px;
-    padding-inline: 24px;
+    padding: 1.1rem 2rem;
     border-radius: 50px;
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
+    width: 240px;
+    align-items: center;
+    justify-content: center;
 }
 
-.buttonSecond{
+
+.button-second{
     display:none;
     background-color: var(--red);
+    border: 1px solid var(--white);
     color: var(--white);
-    width: 160px;
-    padding: 12px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -1.5rem;
+    width: 240px;
+    padding: 1rem 2rem;
     border-radius: 50px;
-    text-align: center;
+    display: none;
+    align-items: center;
+    justify-content: center;
 
-    & .buttonSecondSpan{
+    & .decrement-div, .increment-div{
+        cursor: pointer;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        border: 1px solid var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+   
+
+    & .quantity-button{
         margin-inline: 40px;
     }
 
 }
+
+
 
 .buttonConfirm{
     display: none;
