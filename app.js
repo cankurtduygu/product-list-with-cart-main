@@ -1,5 +1,8 @@
 "use strict";
 const productList = document.querySelector(".product-list");
+const buttonConfirm = document.querySelector(".buttonConfirm");
+const yourCardSection = document.querySelector(".your-card-section");
+const emptyCardDiv = document.querySelector(".empty-card");
 
 let productArray = [];
 const cardMap = new Map(); // key: product.name, value: { ...product, quantity }
@@ -65,6 +68,9 @@ function addToCard(product) {
   } else {
     cardMap.set(key, { ...product, quantity: 1 });
   }
+
+  
+
 }
 
 function removeFromCard(product) {
@@ -132,13 +138,63 @@ const updateCardData = (productAddButtons) => {
 
 function updateCardDisplay(product, action) {
   const cardItems = Array.from(cardMap.values());
+  
+  
+  const totalPriceElement = document.querySelector(".total-price");
 
   const total = cardItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  totalPriceElement.textContent = `$${total.toFixed(2)}`;
 
-  console.log("ACTION:", action, "PRODUCT:", product.name);
-  console.log("CARD:", cardItems);
-  console.log("TOTAL:", total.toFixed(2));
+  
+  if (emptyCardDiv) {
+    emptyCardDiv.style.display = "none";
+    buttonConfirm.style.display = "block";
+  }
+
+  yourCardSection.innerHTML = "";
+
+  cardMap.forEach((item)=>{
+
+    yourCardSection.innerHTML += `<div class="your-card-product-container">
+          <!-- Card Items -->
+          <div class="your-card-product-name">
+            <p class="text-2">${item.name}</p>
+
+            <div class="your-card-product-details">
+              <p class="yc-product-quantity textBold-4">${item.quantity}</p>
+              <p class="yc-product-price">@ $${item.price.toFixed(2)}</p>
+              <p class="yc-product-total-price">$${(item.price * item.quantity).toFixed(2)}</p>
+            </div>
+          </div>
+          <div class="your-card-image-remove">
+            <img src="./assets/images/icon-remove-item.svg" alt="">
+          </div>
+        </div>`
+    
+  });
+
+  const removeIcons = document.querySelectorAll(".your-card-image-remove");
+  
+  removeIcons.forEach((icon, index) => {
+    icon.addEventListener("click", () => {
+      const productToRemove = Array.from(cardMap.values())[index];
+      removeItemFromCard(productToRemove);
+    });
+  });
 }
+
+function removeItemFromCard(product) {
+  cardMap.delete(product.name);
+  updateCardDisplay();
+
+  // Eğer sepet boşaldıysa boş sepet mesajını göster
+  if (cardMap.size === 0) {
+    emptyCardDiv.style.display = "flex";
+    buttonConfirm.style.display = "none";
+  }
+
+}
+

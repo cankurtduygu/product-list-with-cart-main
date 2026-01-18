@@ -1,0 +1,72 @@
+.pay-section{
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: min(2vw,1rem);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);  
+    margin-top: min(4vw,24px);
+    min-width: 400px;
+    flex: 0 0 clamp(320px, 28vw, 420px);
+}
+
+@media screen and (min-width: 768px) {
+    .pay-section{
+        margin-top: 0;
+        height: fit-content;
+    }
+}
+
+.head-quantity{
+    color: var(--red);
+    
+}
+.empty-card{
+    color: var(--rose-500);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: min(2vw,16px);
+    padding: min(4vw,24px) 0;
+}
+
+
+.your-card-total{
+    display: flex;
+    justify-content: space-between;
+}
+
+.your-card-section{
+    display: flex;
+    flex-direction: column;
+}
+.your-card-product-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--rose-300);
+}
+
+.your-card-product-details{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.yc-product-quantity{
+    color: var(--red);
+}
+
+.your-card-image-remove{
+    border: 1px solid var(--rose-300);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.your-card-total{
+    margin-top: 2rem;
+    padding: 1rem;
+}
