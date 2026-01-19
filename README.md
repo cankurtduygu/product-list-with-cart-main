@@ -1,100 +1,145 @@
-# Frontend Mentor - Product list with cart
+# Product List with Cart 🛒
 
-![Design preview for the Product list with cart coding challenge](./preview.jpg)
+🔗 **Live Demo**  
+https://cankurtduygu.github.io/product-list-with-cart/
 
-## Welcome! 👋
+📦 **Repository**  
+https://github.com/cankurtduygu/product-list-with-cart-main
 
-Thanks for checking out this front-end coding challenge.
+---
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## 📸 Demo
 
-**To do this challenge, you need a good understanding of HTML, CSS and JavaScript.**
+Below is a preview of the application interface:
 
-## The challenge
+![Product List with Cart Preview](./preview.jpg)
 
-Your challenge is to build out this product list project that includes a functional cart and get it looking as close to the design as possible.
+---
 
-You can use any tools you like to help you complete the challenge. So, if you have something you'd like to practice, feel free to give it a go.
+## 📖 Description
 
-We provide the data for the products in a local `data.json` file. So you can use that to populate the UI dynamically if you choose.
+This project is a solution to the **Frontend Mentor – Product list with cart** challenge.
 
-Your users should be able to: 
+The goal of this project is to build a responsive product listing page with a fully functional shopping cart using **vanilla JavaScript**, **HTML**, and **CSS**, matching the provided design as closely as possible.
 
-- Add items to the cart and remove them
-- Increase/decrease the number of items in the cart
-- See an order confirmation modal when they click "Confirm Order"
-- Reset their selections when they click "Start New Order"
-- View the optimal layout for the interface depending on their device's screen size
-- See hover and focus states for all interactive elements on the page
+All product data is dynamically loaded from a local `data.json` file.
 
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+---
 
-## Where to find everything
+## 🎯 Problem Statement
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+Users should be able to:
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+- Add products to the cart
+- Increase and decrease product quantities
+- Remove products from the cart
+- See an order confirmation modal after clicking **Confirm Order**
+- Reset the cart and start a new order
+- View an optimal layout across different screen sizes
+- See hover and focus states for all interactive elements
 
-If you would like the Figma design file to gain experience using professional tools and build more accurate projects faster, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+---
 
-All the required assets for this project are in the `/assets` folder. The images are already exported for the correct screen size and optimized.
+## 🧩 Project Structure
 
-We also include variable and static font files for the required fonts for this project. You can choose to either link to Google Fonts or use the local font files to host the fonts yourself. Note that we've removed the static font files for the font weights that aren't needed for this project.
+08-PRODUCT-LIST-WITH-CART
+├── assets
+│   ├── fonts
+│   └── images
+│
+├── css
+│   ├── _base.css
+│   ├── component.css
+│   ├── main.css
+│   ├── modal.css
+│   └── yourcard.css
+│
+├── design
+│   ├── desktop-design.jpg
+│   └── mobile-design.jpg
+│
+├── app.js
+├── data.json
+├── index.html
+├── preview.jpg
+├── style.css
+├── style-guide.md
+├── README.md
+└── .gitignore
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
 
-## Building your project
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+---
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+## ⚙️ Features & Implementation Details
 
-## Deploying your project
+- Product data is fetched asynchronously from `data.json`
+- Cart state is managed using a **Map object** to prevent duplicate products
+- Each product stores its own `quantity` value inside the cart state
+- UI updates are synchronized between:
+  - Product list
+  - Cart sidebar
+  - Order confirmation modal
+- Fully responsive layout using **CSS Grid** and **Flexbox**
+- Modal confirmation screen with order summary
+- Clean separation between UI rendering and state logic
 
-As mentioned above, there are many ways to host your project for free. Our recommend hosts are:
+---
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+## 🧠 Key Concepts Practiced
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+- DOM manipulation with Vanilla JavaScript
+- State management without frameworks
+- Working with `Map` for structured cart data
+- Event handling and UI synchronization
+- Responsive layout design (mobile-first approach)
+- Modal interactions and UI reset logic
 
-## Create a custom `README.md`
+---
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+## 👤 User Stories
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+- When I click **Add to Cart**, the product is added to the cart
+- When I click **+ / −**, the product quantity updates correctly
+- When I remove a product from the cart, the product UI resets
+- When I confirm the order, I see a detailed order summary
+- When I start a new order, the cart and UI reset completely
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+---
 
-## Submitting your solution
+## 🛠️ Technologies Used
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+- HTML5
+- CSS3 (Grid, Flexbox)
+- JavaScript (ES6+)
+- Fetch API
+- Frontend Mentor design assets
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+---
 
-## Sharing your solution
+## 🚀 Deployment
 
-There are multiple places you can share your solution:
+The project is deployed using **GitHub Pages**.
 
-1. Share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+---
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
+## 📌 Notes
 
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
+This project was built as a learning exercise to strengthen my understanding of:
 
-## Got feedback for us?
+- JavaScript state management without frameworks
+- Dynamic UI rendering
+- Responsive layouts
+- Building real-world interactive components
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
+Feedback and suggestions are always welcome 😊
 
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
+---
 
-**Have fun building!** 🚀
+## 🙌 Acknowledgments
+
+Challenge by [Frontend Mentor](https://www.frontendmentor.io).  
+Coded by **Duygu Cankurt**.
+
+
+

@@ -219,9 +219,9 @@ function resetProductCardUI(key) {
 
 
 function removeItemFromYourCard(key) {
-  cardMap.delete(key);          // ✅ sepetten tamamen sil
-  resetProductCardUI(key);      // ✅ product list UI'ı da geri al
-  updateYourCardDisplay();          // ✅ cart'ı yeniden bas
+  cardMap.delete(key);          //  sepetten tamamen sil
+  resetProductCardUI(key);      //  product list UI'ı da geri al
+  updateYourCardDisplay();          //  cart'ı yeniden bas
 
   if (cardMap.size === 0) {
     emptyCardDiv.style.display = "flex";
