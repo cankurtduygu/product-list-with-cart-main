@@ -3,6 +3,9 @@ const productList = document.querySelector(".product-list");
 const buttonConfirm = document.querySelector(".buttonConfirm");
 const yourCardSection = document.querySelector(".your-card-section");
 const emptyCardDiv = document.querySelector(".empty-card");
+const modal = document.querySelector(".modal");
+const modalBody = document.querySelector(".modal-body");
+const buttonNewOrderDiv = document.querySelector(".buttonNewOrder");
 
 let productArray = [];
 const cardMap = new Map(); // key: product.name, value: { ...product, quantity }
@@ -26,7 +29,7 @@ getProduct();
 const renderProducts = () => {
   productList.innerHTML = "";
   productArray.forEach((product) => {
-    productList.innerHTML += `<div class="product-card">
+    productList.innerHTML += `<div class="product-card" data-key="${product.name}">
           <div class="product-img-section">
             <picture class="product-img">
               <source srcset="${product.image.desktop}" media="(min-width: 992px)">
@@ -112,7 +115,7 @@ const updateCardData = (productAddButtons) => {
         currentQuantity = cardMap.get(selectedProduct.name).quantity;
         quantityDisplay.textContent = currentQuantity;
 
-        updateCardDisplay(selectedProduct, "add");
+        updateYourCardDisplay(selectedProduct, "add");
       };
 
       decrement.onclick = () => {
@@ -121,24 +124,23 @@ const updateCardData = (productAddButtons) => {
         if (!cardMap.has(selectedProduct.name)) {
           quantityButton.style.display = "none";
           button.style.display = "flex";
-          updateCardDisplay(selectedProduct, "remove");
+          updateYourCardDisplay(selectedProduct, "remove");
           return;
         }
 
         currentQuantity = cardMap.get(selectedProduct.name).quantity;
         quantityDisplay.textContent = currentQuantity;
 
-        updateCardDisplay(selectedProduct, "remove");
+        updateYourCardDisplay(selectedProduct, "remove");
       };
 
-      updateCardDisplay(selectedProduct, "add");
+      updateYourCardDisplay(selectedProduct, "add");
     });
   });
 };
 
-function updateCardDisplay(product, action) {
+function updateYourCardDisplay(product, action) {
   const cardItems = Array.from(cardMap.values());
-  
   
   const totalPriceElement = document.querySelector(".total-price");
 
@@ -169,7 +171,7 @@ function updateCardDisplay(product, action) {
               <p class="yc-product-total-price">$${(item.price * item.quantity).toFixed(2)}</p>
             </div>
           </div>
-          <div class="your-card-image-remove">
+          <div class="your-card-image-remove" data-key="${item.name}">
             <img src="./assets/images/icon-remove-item.svg" alt="">
           </div>
         </div>`
@@ -178,17 +180,20 @@ function updateCardDisplay(product, action) {
 
   const removeIcons = document.querySelectorAll(".your-card-image-remove");
   
-  removeIcons.forEach((icon, index) => {
+  removeIcons.forEach((icon) => {
     icon.addEventListener("click", () => {
-      const productToRemove = Array.from(cardMap.values())[index];
-      removeItemFromCard(productToRemove);
+      const key = icon.dataset.key;
+      removeItemFromYourCard(key);
     });
   });
+
+  
 }
 
-function removeItemFromCard(product) {
+function removeItemFromYourCard(product) {
   cardMap.delete(product.name);
-  updateCardDisplay();
+  updateYourCardDisplay();
+
 
   // Eğer sepet boşaldıysa boş sepet mesajını göster
   if (cardMap.size === 0) {
@@ -197,4 +202,86 @@ function removeItemFromCard(product) {
   }
 
 }
+
+function resetProductCardUI(key) {
+  const cardEl = document.querySelector(`.product-card[data-key="${CSS.escape(key)}"]`);
+  if (!cardEl) return;
+
+  const addBtn = cardEl.querySelector(".product-add-button-first");
+  const qtyBtn = cardEl.querySelector(".button-second");
+  const qtyText = cardEl.querySelector(".quantity-button");
+
+  // UI reset
+  if (qtyBtn) qtyBtn.style.display = "none";
+  if (addBtn) addBtn.style.display = "flex";
+  if (qtyText) qtyText.textContent = "1";
+}
+
+
+function removeItemFromYourCard(key) {
+  cardMap.delete(key);          // ✅ sepetten tamamen sil
+  resetProductCardUI(key);      // ✅ product list UI'ı da geri al
+  updateYourCardDisplay();          // ✅ cart'ı yeniden bas
+
+  if (cardMap.size === 0) {
+    emptyCardDiv.style.display = "flex";
+    buttonConfirm.style.display = "none";
+  }
+}
+
+function openConfirmModal() {
+  modal.style.display = "block";
+  modalBody.innerHTML = ""; // Önce temizle
+
+  cardMap.forEach((item) => {
+    modalBody.innerHTML += `
+      <div class="modal-product-container">
+        <div class="modal-product-link">
+          <div class="modal-image">
+            <img class="modal-product-img" src="${item.image.mobile}" alt="" />
+          </div>
+          <div class="modal-product-right">
+            <p class="modal-product-right-name">${item.name}</p>
+
+            <div class="modal-product-details">
+              <p class="modal-quantity textBold-4">${item.quantity}X</p>
+              <p class="modal-price textBold-4">@ $${item.price.toFixed(2)}</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="modal-product-total-price text-2">$${(item.price * item.quantity).toFixed(2)}</p>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function startNewOrder() {
+  modal.style.display = "none";
+
+  // state temizle
+  cardMap.clear();
+
+  // cart UI temizle
+  yourCardSection.innerHTML = "";
+  emptyCardDiv.style.display = "flex";
+  buttonConfirm.style.display = "none";
+
+  // total sıfırla
+  const totalPriceElement = document.querySelector(".total-price");
+  totalPriceElement.textContent = "$0.00";
+
+  // product list UI resetle
+  productArray.forEach((product) => {
+    resetProductCardUI(product.name);
+  });
+}
+
+// handler'lar artık sadece fonksiyon çağırır
+buttonConfirm.onclick = openConfirmModal;
+buttonNewOrderDiv.onclick = startNewOrder;
+
+
+
 
