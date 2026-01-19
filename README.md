@@ -1,7 +1,7 @@
 # Product List with Cart 🛒
 
 🔗 **Live Demo**  
-https://cankurtduygu.github.io/product-list-with-cart/
+https://productlist-with-card.netlify.app/
 
 📦 **Repository**  
 https://github.com/cankurtduygu/product-list-with-cart-main
