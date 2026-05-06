@@ -42,34 +42,23 @@ Users should be able to:
 
 ## 🧩 Project Structure
 
-08-PRODUCT-LIST-WITH-CART
+```bash
+product-list-with-cart
+│
 ├── assets
-│   ├── fonts
-│   └── images
+│   └── dessert-cart-demo.gif
 │
 ├── css
-│   ├── _base.css
-│   ├── component.css
 │   ├── main.css
-│   ├── modal.css
-│   └── yourcard.css
+│   └── component.css
 │
-├── design
-│   ├── desktop-design.jpg
-│   └── mobile-design.jpg
+├── images
 │
 ├── app.js
 ├── data.json
 ├── index.html
-├── preview.jpg
-├── style.css
-├── style-guide.md
-├── README.md
-└── .gitignore
-
-
-
----
+└── README.md
+```
 
 ## ⚙️ Features & Implementation Details
 
