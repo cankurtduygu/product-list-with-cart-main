@@ -1,6 +1,8 @@
 .main{
     width: 100%;
-    padding:min(3vw,1rem);
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
     background-color: var(--rose-50);
 }
 
@@ -23,6 +25,10 @@
 }
 
 @media screen and (min-width: 540px) and (max-width: 767px) {
+    .main {
+        padding: 1.5rem 1.5rem;
+    }
+
     .container{
         display: flex;
         flex-direction: column;
@@ -32,6 +38,10 @@
 
 
 @media screen and (min-width: 768px) and (max-width: 1023px){
+    .main {
+        padding: 2rem 1.5rem;
+    }
+
     .product-list{
         grid-template-columns: repeat(2,1fr);
         width: 100%;
@@ -46,24 +56,21 @@
 
 
 @media screen and (min-width: 1024px){
-    
+    .main {
+        padding: 2.5rem 2rem;
+    }
+
     .product-list{
         grid-template-columns: repeat(3,1fr);
         width: 100%;
-    }
-    .product-card {
-        width: 360px;
-      
     }
 
     .container{
         display: flex;
         flex-direction: row;
         gap: 32px;
-
-        
+        align-items: flex-start;
     }
-
 }
 
 .product-img-section{

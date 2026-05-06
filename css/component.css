@@ -13,7 +13,7 @@
     border-radius: 50px;
     display: flex;
     gap: 0.5rem;
-    width: 240px;
+    width: min(240px, 80%);
     align-items: center;
     justify-content: center;
 }
@@ -28,7 +28,7 @@
     left: 50%;
     transform: translateX(-50%);
     bottom: -1.5rem;
-    width: 240px;
+    width: min(240px, 80%);
     padding: 1rem 2rem;
     border-radius: 50px;
     display: none;

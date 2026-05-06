@@ -1,17 +1,24 @@
 .pay-section{
     background-color: var(--white);
     border-radius: 1rem;
-    padding: min(2vw,1rem);
+    padding: 1.25rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);  
-    margin-top: min(4vw,24px);
-    min-width: 400px;
-    flex: 0 0 clamp(320px, 28vw, 420px);
+    margin-top: 1.5rem;
+    width: 100%;
 }
 
 @media screen and (min-width: 768px) {
     .pay-section{
         margin-top: 0;
         height: fit-content;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .pay-section{
+        flex: 0 0 clamp(320px, 28vw, 420px);
+        width: clamp(320px, 28vw, 420px);
+        margin-top: 0;
     }
 }
 
