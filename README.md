@@ -43,21 +43,30 @@ Users should be able to:
 ## 🧩 Project Structure
 
 ```bash
-product-list-with-cart
-│
+PRODUCT-LIST-WITH-CART
 ├── assets
-│   └── dessert-cart-demo.gif
+│   ├── fonts
+│   └── images
 │
 ├── css
+│   ├── _base.css
+│   ├── component.css
 │   ├── main.css
-│   └── component.css
+│   ├── modal.css
+│   └── yourcard.css
 │
-├── images
+├── design
+│   ├── desktop-design.jpg
+│   └── mobile-design.jpg
 │
 ├── app.js
 ├── data.json
 ├── index.html
-└── README.md
+├── preview.jpg
+├── style.css
+├── style-guide.md
+├── README.md
+└── .gitignore
 ```
 
 ## ⚙️ Features & Implementation Details
